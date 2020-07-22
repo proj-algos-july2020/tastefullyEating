@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <div class="header text-right">
+    {% if  request.session.userid  %}
+          <h4 class="d-inline-block text-dark px-5"><a href="/logout" class="headeradesign" style="text-decoration: none; color: #403e3e
+">Log out</a></h4>
+    {% else %}
+        <h4 class="d-inline-block"><a href="/login" class="headeradesign">Login</a></h4>
+        <h4 class="d-inline-block"><a href="/register" class="headeradesign">Register</a></h4>
+    {% endif %}
+</div>
+<div class="wrapper">
+{#    <h4 class="text-center mt-2 text-secondary" style="letter-spacing: 0.1em">Welcome {{ name }}</h4>#}
+    <a href="/" style="text-decoration: none;"><h1 class="text-center fz-3 text-black" style=" margin-top: 60px">Tastefully Eating</h1></a>
+    <div class="row text-center w40">
+        {% for FoodType in FoodTypes %}
+            <div class="col">
+                <h5><a href="/recipes/{{ FoodType.type }}" style="text-decoration: none;" class="adesign">{{ FoodType.type }}</a></h5>
+            </div>
+        {% endfor %}
+
+        <div class="col-12">
+            <form action="/search" method="GET">
+
+                <input type="text" name="q" class="form-control mt-2 form-control-sm" placeholder="search recipes">
+            </form>
+        </div>
+        <a href="/addRecipe" class="my-4 col-6 offset-md-3" >
+            <button class="btn btn-outline-dark btn-sm">
+                <i class="fas fa-plus d-inline"></i>
+                Add recipe
+            </button>
+        </a>
+    </div>
+        {% if recipes %}
+            {% for recipe in recipes %}
+                <h1>{{ recipe.recipe_name }}</h1>
+                <p>{{ recipe.recipe_description }}</p>
+                <img src="/media/{{ recipe.photo }}" style="height: 100px; width: 100px;" alt="">
+                <a href="/recipe/{{ recipe.id }}"><button>View more</button></a>
+                <hr>
+            {% endfor %}
+         {% else %}
+            <h1>There is no result! Help us by adding <a href="/addRecipe">here!</a></h1>
+        {% endif %}
+</div>
+
+<script>
+    document.body.onload = function () {
+        document.getElementsByName("q")[0].addEventListener("keyup", function(event) {
+          // Number 13 is the "Enter" key on the keyboard
+          if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementsByTagName("form")[0].submit()
+          }
+        });
+    }
+</script>
+</body>
+</html>

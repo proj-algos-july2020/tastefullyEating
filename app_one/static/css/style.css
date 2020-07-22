@@ -1,0 +1,134 @@
+.container{
+    /*background-color: #f8f7f3;*/
+    /*min-height: 600px;*/
+    /*background-color: rgb(#8e9eab,#eef2f3,#eef2f3);*/
+    background-image: linear-gradient(to right, #b5dcd3, #eef2f3);
+    border-radius: 10px;
+    box-shadow: 5px 10px #8fb4a8;
+}
+.box{
+    background-color: white;
+    box-shadow: 5px 5px #c6dcd5;
+}
+.mt-150{
+    margin-top: 150px;
+}
+.mt-100{
+    margin-top: 100px;
+}
+.ml-80{
+    margin-left: 80px;
+}
+.color-green{
+   color: #8bbbb6;
+   font-weight: bold;
+    /*color: #a19696*/
+
+}
+/*login and sign up design*/
+button{
+    /*background-color: #4d96cd;*/
+    /*background-image: linear-gradient(to right, #6092b4, #d3dcde);*/
+    background-color: #7bb4a2;
+    font-weight: bold;
+    color: white;
+}
+button a{
+    color: white;
+}
+.mt-50{
+    margin-top: 50px;
+}
+
+/*Tastefully eating title and paragraph*/
+h1{
+    font-family: "Segoe UI Semilight";
+    color: #7bb4a2;
+    font-weight: initial;
+}
+p{
+    font-family: serif;
+}
+.fz-4{
+    font-size: 4vw;
+}
+.fz-3{
+    font-size: 3vw;
+}
+.fz-1{
+    font-size: 1.5vw;
+}
+.border-rad10{
+    border: 1px solid #dcc8c8;
+    border-radius: 15px;
+    width: 70%;
+}
+.w100{
+    width: 90%;
+}
+.w50{
+    width: 50%;
+}
+.w40{
+    width: 37%;
+}
+.txt-center{
+    text-align: center;
+}
+.m10{
+    margin: 10px;
+}
+.p20{
+    padding: 20px;
+}
+
+.h40{
+    height: 40px;
+
+}
+.str{
+    align-items: center;
+    border-bottom: 1px solid #dadde1;
+    display: flex;
+    margin: 20px 16px;
+    text-align: center;
+}
+.txt-left{
+    text-align: left;
+}
+.pl20{
+    padding-left: 20px;
+}
+.some{
+    width: 90%;
+    margin: 10px;
+    padding: 20px;
+    height: 40px;
+    border: 1px solid #dcc8c8;
+    border-radius: 5px;
+    font-size: 18px;
+}
+.p0{
+    padding: 0px;
+}
+.pr0{
+    padding-right: 0;
+}
+.text-white{
+    color: white;
+}
+.text-d-n{
+    text-decoration: none;
+}
+.p10{
+    padding: 10px;
+}
+.mt40{
+    margin-top: 40px;
+}
+.bg-linear-green{
+     background-image: linear-gradient(to right, rgba(255, 255, 255, 0.69), #7eb687);
+
+}
+
+

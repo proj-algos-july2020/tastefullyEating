@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+            integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+<div class="header text-right">
+    {% if request.session.userid %}
+{#        <h4 class="d-inline-block"><a href="/addRecipe" class="headeradesign">Add a recipe</a></h4>#}
+        <h4 class="d-inline-block"><a href="/logout" class="headeradesign" style="color: #4b4848">Log out</a></h4>
+    {% else %}
+        <h4 class="d-inline-block"><a href="/login" class="headeradesign">Login</a></h4>
+        <h4 class="d-inline-block"><a href="/register" class="headeradesign">Register</a></h4>
+    {% endif %}
+</div>
+<div class="wrapper">
+    <a href="/" style="text-decoration: none;"><h1 class="text-center fz-3 text-black" style=" margin-top: 60px">
+        Tastefully Eating</h1></a>
+    <div class="row text-center w40">
+        {% for FoodType in FoodTypes %}
+            <div class="col">
+                <h5><a href="/recipes/{{ FoodType.type }}" style="text-decoration: none;"
+                       class="adesign">{{ FoodType.type }}</a></h5>
+            </div>
+        {% endfor %}
+        <div class="col-12">
+            <form action="/search" method="GET">
+                <input type="text" name="q" class="form-control mt-2 form-control-sm" placeholder="search recipes">
+            </form>
+        </div>
+        <a href="/addRecipe" class="my-4 col-6 offset-md-3">
+            <button class="btn btn-outline-dark btn-sm">
+                <i class="fas fa-plus d-inline"></i>
+                Add recipe
+            </button>
+        </a>
+
+    </div>
+    <div class="col-sm-12 my-4 py-4">
+        {% if type == "Healthy Food" %}
+            <h2 class="col-sm-7" style="font-weight: bolder; font-size: 39px">Best Healthy Food</h2>
+            <p class="col-sm-9" style="font-size: 25px">Not eating fast food? Cool! Dig in to these easy and delicious
+                vegetarian recipes for all of
+                your plant-based needs — from meatless main dishes, to healthy protein-packed sides, to weeknight
+                options that are kid-friendly, low-carb, or vegan. Let’s eat!</p>
+        {% elif type == "Fast Food" %}
+            <h2 class="col-sm-7" style="font-weight: bolder; font-size: 39px">Fast Food</h2>
+            <p class="col-sm-9" style="font-size: 25px">Not eating healthy food? Cool! Dig in to these easy and
+                delicious vegetarian recipes for all of
+                your plant-based needs — from meatless main dishes, to healthy protein-packed sides, to weeknight
+                options that are kid-friendly, low-carb, or vegan. Let’s eat!</p>
+
+        {% endif %}
+
+    </div>
+    {% if recipes %}
+        <div class="row my-5">
+            {% for recipe in recipes %}
+                <div class="col-3 mb-3">
+                    {#                    <p>{{ recipe.recipe_description }}</p>#}
+                    <a href="/recipe/{{ recipe.id }}"><img class="rounded img-fluid  w-100" src="/media/{{ recipe.photo }}"
+                                                           style="height: 280px" alt=""></a>
+                    <a href="/recipe/{{ recipe.id }}" style="text-decoration: none; color: black;"><h3
+                            class="text-center h3design w-100">{{ recipe.recipe_name }}</h3></a>
+                    {#                    <br><a href="/recipe/{{ recipe.id }}"><button>View more</button></a>#}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2 class="text-center">There is no result! Help us by adding <a href="/addRecipe">here!</a></h2>
+    {% endif %}
+
+
+    <footer class="page-footer card-footer font-small blue pt-4 mt-100">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+            <div class="row">
+                <div class="col-md-5 mt-md-0 mt-3">
+                    <!-- Content -->
+                    <h3 style="letter-spacing: 0.2em; font-family: Calibre-Bold">Tastefully Eating</h3>
+                    <p style="font-family: Calibre-Bold;">This portal is maintained by the company "Tastefully Eating".
+                        The materials and information on this portal may not be copied, printed, or used in any other
+                        form for profit purposes, without the approval of the management of the "Tastefully Eating"</p>
+                    <p class="d-inline">follow us on:</p><i class="fab fa-instagram icon-6x"></i>
+                </div>
+                <div class="col-md-1 mt-md-0 mt-3"></div>
+                <!-- Grid column -->
+                <hr class="clearfix w-100 d-md-none pb-3">
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3 offset-3">
+                    {#        <h5 class="text-uppercase">Links</h5>#}
+                    <ul class="list-unstyled mt40" style="line-height: 40px; ">
+
+                          {% for FoodType in FoodTypes %}
+                              <li>
+                              <a class="text-decoration-none text-brown" href="/recipes/{{ FoodType.type }}">{{ FoodType.type }}</a>
+                              </li>
+                          {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="/" class="text-brown"> TastefullyEating.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+</div>
+</body>
+</html>
